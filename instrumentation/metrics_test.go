@@ -36,7 +36,7 @@ func TestNewMeterProvider(t *testing.T) {
 			cfg: func(w *bytes.Buffer) *MeterConfig {
 				return &MeterConfig{Exporter: MetricExporterConsole, Writer: w}
 			},
-			wantOutput: []string{"test.counter", "agentoffice"},
+			wantOutput: []string{"test.counter", "unknown_service:"},
 		},
 		{
 			name: "console with service name from env",

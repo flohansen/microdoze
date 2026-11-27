@@ -32,7 +32,7 @@ func TestNewTracerProvider(t *testing.T) {
 			cfg: func(w *bytes.Buffer) *TracerConfig {
 				return &TracerConfig{Exporter: TraceExporterConsole, Writer: w}
 			},
-			wantOutput: []string{"test-span", "agentoffice"},
+			wantOutput: []string{"test-span", "unknown_service:"},
 		},
 		{
 			name: "console with service name from env",

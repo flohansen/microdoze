@@ -6,12 +6,15 @@ import (
 	"os"
 )
 
+// LoggerConfig configures the logger created by NewLogger. A nil Writer
+// defaults to stdout.
 type LoggerConfig struct {
 	Level  LogLevel
 	Format LogFormat
 	Writer io.Writer
 }
 
+// LogLevel is the minimum level of log records to emit.
 type LogLevel int
 
 const (
@@ -36,6 +39,7 @@ func ParseLogLevel(s string) LogLevel {
 	}
 }
 
+// LogFormat is the output format of log records.
 type LogFormat int
 
 const (

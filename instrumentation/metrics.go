@@ -11,11 +11,14 @@ import (
 	sdkmetric "go.opentelemetry.io/otel/sdk/metric"
 )
 
+// MeterConfig configures the meter provider created by NewMeterProvider. Writer
+// is only used by MetricExporterConsole and defaults to stdout.
 type MeterConfig struct {
 	Exporter MetricExporter
 	Writer   io.Writer
 }
 
+// MetricExporter selects where metrics are exported to.
 type MetricExporter int
 
 const (

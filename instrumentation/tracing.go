@@ -11,11 +11,14 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
+// TracerConfig configures the tracer provider created by NewTracerProvider.
+// Writer is only used by TraceExporterConsole and defaults to stdout.
 type TracerConfig struct {
 	Exporter TraceExporter
 	Writer   io.Writer
 }
 
+// TraceExporter selects where spans are exported to.
 type TraceExporter int
 
 const (
