@@ -40,6 +40,17 @@ func ParseMetricExporter(s string) MetricExporter {
 	}
 }
 
+// ParseMetricWriter parses the name of the writer used by
+// MetricExporterConsole. Unknown values fall back to stdout.
+func ParseMetricWriter(s string) io.Writer {
+	switch s {
+	case "stderr":
+		return os.Stderr
+	default:
+		return os.Stdout
+	}
+}
+
 // NewMeterProvider creates a meter provider from the given config. A nil config
 // falls back to the zero value (no exporter) and a nil writer to stdout. The
 // resource, the OTLP exporter and the export interval are configured through

@@ -2,6 +2,8 @@ package instrumentation
 
 import (
 	"bytes"
+	"io"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -106,6 +108,30 @@ func TestParseTraceExporter(t *testing.T) {
 
 			// assert
 			assert.Equal(t, tt.wantExporter, exporter)
+		})
+	}
+}
+
+func TestParseTraceWriter(t *testing.T) {
+	tests := []struct {
+		name       string
+		s          string
+		wantWriter io.Writer
+	}{
+		{name: "stdout", s: "stdout", wantWriter: os.Stdout},
+		{name: "stderr", s: "stderr", wantWriter: os.Stderr},
+		{name: "empty defaults to stdout", s: "", wantWriter: os.Stdout},
+		{name: "unknown defaults to stdout", s: "file", wantWriter: os.Stdout},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// arrange
+			// act
+			w := ParseTraceWriter(tt.s)
+
+			// assert
+			assert.Same(t, tt.wantWriter, w)
 		})
 	}
 }

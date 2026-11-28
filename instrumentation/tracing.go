@@ -40,6 +40,17 @@ func ParseTraceExporter(s string) TraceExporter {
 	}
 }
 
+// ParseTraceWriter parses the name of the writer used by TraceExporterConsole.
+// Unknown values fall back to stdout.
+func ParseTraceWriter(s string) io.Writer {
+	switch s {
+	case "stderr":
+		return os.Stderr
+	default:
+		return os.Stdout
+	}
+}
+
 // NewTracerProvider creates a tracer provider from the given config. A nil
 // config falls back to the zero value (no exporter) and a nil writer to stdout.
 // The resource and the OTLP exporter are configured through the standard
